@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="updateEmployeeDataFlow" doc:id="4de29325-1c8a-4819-824d-f2fe1cb96660" >
+		<db:update doc:name="Update" doc:id="1a10b553-c734-495c-85b6-4643dff3d721" config-ref="Database_Config">
+			<db:sql >#[&quot;UPDATE  $(vars.tableName)
+SET name =:name,mobile= :mobile,vill=:vill,mdl=:mdl,dist=:dist,pincode=:pincode,salary=:salary
+WHERE empId=:empId&quot;]</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	name:payload.EmployeeName,
+	mobile:payload.EmployeeMobileNumber,
+	vill:payload.EmployeeAddress.village,
+	mdl:payload.EmployeeAddress.mdl,
+	dist: payload.EmployeeAddress.Dst,
+	pincode: payload.EmployeeAddress.pincode,
+	empId: attributes.uriParams.EmployeeId,
+	salary: payload.Employeesalary
+	
+}]]]></db:input-parameters>
+		</db:update>
+		<ee:transform doc:name="Transform Message" doc:id="e7d0747f-5f4e-4153-90be-5ce12e0d3f6a" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"employee data updated successfully"]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="empIteration" doc:id="fc817713-b54f-4033-abe7-3ce971e489cb" >
+		<ee:transform doc:name="Transform Message" doc:id="a0d8cb24-5347-4a27-8974-370390315790">
+			<ee:message>
+				<ee:set-payload resource="dwl/getAllResponse.dwl" />
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+	<flow name="getAllEmployeesFlow" doc:id="a15fd409-548d-46f3-9e3e-092c1b186870" >
+		<db:select doc:name="Select" doc:id="c8d17f5d-9e19-4041-8bd9-36bbd2bfa322" config-ref="Database_Config">
+			<db:sql >#[&quot;select * from  $(vars.tableName)&quot;]</db:sql>
+		</db:select>
+		<flow-ref doc:name="empIteration" doc:id="dab7b92b-99e1-4ffe-83b3-b3057316b4ab" name="empIteration" />
+	</flow>
+</mule>

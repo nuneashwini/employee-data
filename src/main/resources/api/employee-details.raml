@@ -1,0 +1,65 @@
+#%RAML 1.0
+title: Employee-Details
+types:
+  Employee-Details-Of: !include WorkingEmloyee/BasicDetails.raml
+  UpdateEmployeedetais: !include WorkingEmloyee/DetailsUpdation.raml
+/EmployeeInformation:
+  get:
+    queryParameters:
+      EmployeeId:
+        type: string
+        minLength: 1
+        maxLength: 40    
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Employee-info/Single.json
+
+  post:
+    body:
+      application/json:
+       type: Employee-Details-Of
+       example: !include Employee-info/Single.json
+    responses:
+      201:
+        body:
+          application/json:            
+           example:
+            {"Message": "Employee Details Added Successfully"}
+/{EmployeeId}:
+  uriParameters:
+    EmployeeId:
+      type: string
+      minLength: 1
+      maxLength: 40
+      example:
+        "dev0011"
+  put:
+    body:
+      application/json:
+        type: UpdateEmployeedetais
+    responses:
+      200:
+        body:
+          application/json:
+            example: {"Message": "Details Updated"}
+  delete:
+    queryParameters:
+      EmployeeId:
+        type: string
+        example:
+          "1"
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"Message" : "Employee Details Deleted"}
+/getall:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include Employee-info/BulkDetails.json

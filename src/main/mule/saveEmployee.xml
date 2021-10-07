@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="saveEmployeeFlow" doc:id="a33e34b8-59de-4e9a-9ec1-ab514baf7ad7" >
+		<db:insert doc:name="Insert" doc:id="d33362fc-eb55-4c88-bde7-d819284a3bba" config-ref="Database_Config">
+			<db:sql >#[&quot;INSERT INTO $(vars.tableName)
+VALUES (:empId,:name,:dob,:dept,:salary,:mobile,:vill,:mdl,:dist,:pincode)&quot;]</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	'empId': payload.EmployeeId,
+	'name': payload.EmployeeName,
+	'dob': payload.EmployeeDOB,
+	'dept': payload.EmployeeDepartment,
+	'salary': payload.EmployeeSalary,
+	'mobile': payload.EmployeeMobileNumber,
+	'vill': payload.EmployeeAddress.village,
+	'mdl': payload.EmployeeAddress.mdl,
+	'dist': payload.EmployeeAddress.Dst,
+	'pincode': payload.EmployeeAddress.pincode
+}]]]></db:input-parameters>
+		</db:insert>
+		<ee:transform doc:name="Transform Message" doc:id="41f7ae31-794d-4bbb-b615-7f474d6f683f" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"employee details added to database"]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

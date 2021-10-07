@@ -1,0 +1,50 @@
+#%RAML 1.0 DataType
+type: object
+properties:  
+    EmployeeId:
+        type: string
+        minLength: 1
+        maxLength: 40
+        example: "Dev0011"
+    EmployeeName:
+        type: string
+        minLength: 3
+        maxLength: 100
+        example: "Devendar reddy"
+    EmployeeDOB:
+        type: date-only
+        example: "2001-01-01"
+    EmployeeDepartment:
+        enum:
+          - Mulesoft
+          - Java
+    EmployeeSalary:
+        type: string
+        example: "12345"
+    EmployeeMobileNumber:
+        type: string      
+        minLength: 10
+        maxLength: 10
+        example: "9700046176"    
+    EmployeeAddress:
+      type: object
+      properties:
+        village: 
+         type: string
+         example: "KNP"
+        mdl:
+          type: string
+          example: "kspm"
+        Dst:
+          type: string
+          example: "knr"
+        pincode:
+          type: string
+          minLength: 6
+          maxLength: 6
+          example: "505505"
+
+
+         
+    
+    

@@ -1,0 +1,32 @@
+#%RAML 1.0 DataType
+type: object
+properties:  
+    EmployeeName:
+        type: string
+        minLength: 3
+        maxLength: 100
+        example: "Devendar reddy"
+    Employeesalary:
+      type: string         
+    EmployeeMobileNumber:
+        type: string      
+        minLength: 10
+        maxLength: 10
+        example: "9700046176"    
+    EmployeeAddress:
+       type: object
+       properties:
+        village: 
+         type: string
+         example: "KNP"
+        mdl:
+          type: string
+          example: "kspm"
+        Dst:
+          type: string
+          example: "knr"
+        pincode:
+          type: string
+          example: "505505"
+          minLength: 6
+          maxLength: 6

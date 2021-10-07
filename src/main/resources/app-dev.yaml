@@ -1,0 +1,7 @@
+database:
+  host: "bbny3xzbaa312ddwbpob-mysql.services.clever-cloud.com"
+  port: "3306"
+  db: "bbny3xzbaa312ddwbpob"
+  username: "![6D8dGtKd2QOIWnbvjB7y8VK8MG7njIWJPLT4XkQnT80=]"
+  password: "![XFxyqGzIm8ylcYop2zPYd4a6vg+mdDKZUCKlSkA7W4k=]"
+  table: "employeedata"

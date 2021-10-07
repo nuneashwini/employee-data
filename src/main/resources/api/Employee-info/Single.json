@@ -1,0 +1,16 @@
+{
+  "EmployeeId" : "1",
+  "EmployeeName" : "Devendar",
+  "EmployeeDOB" :"2021-01-01",
+  "EmployeeDepartment" : "Mulesoft",
+  "EmployeeSalary" : "12345",
+  "EmployeeMobileNumber" : "9876543210",
+  "EmployeeAddress" :
+  {
+  "village" : "Karimnagar",
+  "mdl" : "kspm",
+  "Dst" : "Karimnagar",
+  "pincode" : "505501"
+  }
+  
+}
